@@ -37,8 +37,7 @@ defmodule ElixirSearchRouterTest do
     {:ok, input_json} = Jason.encode(data)
     {:ok, agent} = SearchIndexAgent.start_link()
 
-    conn =
-      ElixirSearchRouter.call(conn(:put, "/documents/some-id", input_json), index_agent: agent)
+    ElixirSearchRouter.call(conn(:put, "/documents/some-id", input_json), index_agent: agent)
 
     index = SearchIndexAgent.get(agent)
     assert(SearchIndex.contains?(index, "some-id"))
