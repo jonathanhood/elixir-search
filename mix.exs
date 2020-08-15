@@ -22,7 +22,8 @@ defmodule ElixirSearch.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:plug_cowboy, "~> 2.3"}
+      {:plug_cowboy, "~> 2.3"},
+      {:jason, "~> 1.2"}
     ]
   end
 end
