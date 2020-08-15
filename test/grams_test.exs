@@ -38,6 +38,6 @@ defmodule GramsTest do
   test "return an intermediate value for similar strings" do
     left = Grams.grams_for("hello")
     right = Grams.grams_for("hellboy")
-    assert(Grams.jaccard(left, right) == 1/3)
+    assert(Grams.jaccard(left, right) == 1 / 3)
   end
 end

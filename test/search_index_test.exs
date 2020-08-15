@@ -7,14 +7,16 @@ defmodule SearchIndexTest do
   @other_id "other-id"
 
   test "is empty by default" do
-    result = SearchIndex.new()
+    result =
+      SearchIndex.new()
       |> SearchIndex.search("hello")
 
     assert(result == [])
   end
 
   test "insert a document" do
-    result = SearchIndex.new()
+    result =
+      SearchIndex.new()
       |> SearchIndex.insert(@id, @data)
       |> SearchIndex.contains?(@id)
 
@@ -22,7 +24,8 @@ defmodule SearchIndexTest do
   end
 
   test "remove a document" do
-    result = SearchIndex.new()
+    result =
+      SearchIndex.new()
       |> SearchIndex.insert(@id, @data)
       |> SearchIndex.remove(@id)
       |> SearchIndex.contains?(@id)
@@ -36,7 +39,8 @@ defmodule SearchIndexTest do
       %{score: 0.0, data: @other_data}
     ]
 
-    result = SearchIndex.new()
+    result =
+      SearchIndex.new()
       |> SearchIndex.insert(@id, @data)
       |> SearchIndex.insert(@other_id, @other_data)
       |> SearchIndex.search("world")

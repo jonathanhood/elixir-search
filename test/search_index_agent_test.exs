@@ -11,7 +11,7 @@ defmodule SearchIndexAgentTest do
     assert(index == %{})
   end
 
-  test "insert a document", %{agent: agent}  do
+  test "insert a document", %{agent: agent} do
     SearchIndexAgent.insert(agent, "some-id", %{hello: "world"})
     exists = SearchIndexAgent.get(agent) |> SearchIndex.contains?("some-id")
     assert(exists)

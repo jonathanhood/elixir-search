@@ -1,5 +1,4 @@
 defmodule Document do
-
   def create(data) do
     %{grams: Grams.grams_for(data), data: data}
   end

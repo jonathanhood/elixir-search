@@ -6,7 +6,7 @@ defmodule Grams do
   end
 
   def grams_for(value) when is_map(value) do
-    Enum.reduce(Map.values(value), MapSet.new(), fn v,acc -> MapSet.union(grams_for(v), acc) end)
+    Enum.reduce(Map.values(value), MapSet.new(), fn v, acc -> MapSet.union(grams_for(v), acc) end)
   end
 
   def grams_for(value) when is_bitstring(value) do

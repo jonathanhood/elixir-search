@@ -18,7 +18,7 @@ defmodule SearchIndex do
   end
 
   def get(bucket, id) do
-    case Map.get(bucket, id)  do
+    case Map.get(bucket, id) do
       nil -> nil
       result -> result.data
     end
@@ -30,10 +30,11 @@ defmodule SearchIndex do
 
   defp score_docs(keyword, documents) do
     keyword_grams = Grams.grams_for(keyword)
+
     Enum.map(documents, fn doc -> doc |> score_doc(keyword_grams) end)
-      |> Enum.sort_by(&Map.fetch(&1, :score))
-      |> Enum.reverse()
-      |> Enum.take(10)
+    |> Enum.sort_by(&Map.fetch(&1, :score))
+    |> Enum.reverse()
+    |> Enum.take(10)
   end
 
   defp score_doc(doc, keyword_grams) do

@@ -10,9 +10,9 @@ defmodule ElixirSearchRouter do
 
   get "/search/:keyword" do
     opts[:index_agent]
-      |> SearchIndexAgent.get()
-      |> SearchIndex.search(keyword)
-      |> search_response(conn)
+    |> SearchIndexAgent.get()
+    |> SearchIndex.search(keyword)
+    |> search_response(conn)
   end
 
   put "/documents/:id" do
@@ -23,7 +23,8 @@ defmodule ElixirSearchRouter do
   end
 
   get "/documents/:id" do
-    doc = opts[:index_agent]
+    doc =
+      opts[:index_agent]
       |> SearchIndexAgent.get()
       |> SearchIndex.get(id)
       |> doc_get_response(conn)
