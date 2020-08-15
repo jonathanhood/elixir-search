@@ -7,14 +7,14 @@ defmodule ElixirSearchRouter do
 
   get "/search/:keyword" do
     opts[:index_agent]
-      |> Agent.get(& &1)
+      |> SearchIndexAgent.get()
       |> SearchIndex.search(keyword)
       |> search_response(conn)
   end
 
   put "/documents/:id" do
     {:ok, body, conn} = read_body(conn, opts)
-    opts[:index_agent] |> Agent.update(&SearchIndex.insert(&1, id, body))
+    opts[:index_agent] |> SearchIndexAgent.insert(id, body)
     send_resp(conn, 201, "")
   end
 
