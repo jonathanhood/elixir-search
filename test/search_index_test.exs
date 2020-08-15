@@ -1,8 +1,8 @@
 defmodule SearchIndexTest do
   use ExUnit.Case
 
-  @data %{"hello": "world"}
-  @other_data %{"other": "stuff"}
+  @data %{hello: "world"}
+  @other_data %{other: "stuff"}
   @id "some-id"
   @other_id "other-id"
 
