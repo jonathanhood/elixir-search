@@ -22,6 +22,26 @@ defmodule ElixirSearchRouter do
     send_resp(conn, 201, "")
   end
 
+  get "/documents/:id" do
+    doc = opts[:index_agent]
+      |> SearchIndexAgent.get()
+      |> SearchIndex.get(id)
+      |> doc_get_response(conn)
+  end
+
+  match _ do
+    send_resp(conn, 404, "")
+  end
+
+  defp doc_get_response(nil, conn) do
+    send_resp(conn, 404, "")
+  end
+
+  defp doc_get_response(doc, conn) do
+    {:ok, json} = Jason.encode(doc)
+    send_resp(conn, 200, json)
+  end
+
   defp search_response([], conn) do
     send_resp(conn, 200, "nothing")
   end

@@ -1,9 +1,4 @@
 defmodule SearchIndex do
-
-  def start_link(_opts) do
-    Agent.start_link(fn -> %{} end)
-  end
-
   def new() do
     %{}
   end
@@ -23,7 +18,10 @@ defmodule SearchIndex do
   end
 
   def get(bucket, id) do
-    Map.get(bucket, id).data
+    case Map.get(bucket, id)  do
+      nil -> nil
+      result -> result.data
+    end
   end
 
   def search(bucket, keyword) do
