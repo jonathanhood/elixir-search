@@ -3,7 +3,10 @@ defmodule ElixirSearchRouter do
 
   plug(:match)
   plug(:dispatch, builder_opts())
-  plug(Plug.Parsers, parsers: [:json], json_decoder: Jason)
+
+  get "/status" do
+    send_resp(conn, 200, "up")
+  end
 
   get "/search/:keyword" do
     opts[:index_agent]
@@ -14,7 +17,8 @@ defmodule ElixirSearchRouter do
 
   put "/documents/:id" do
     {:ok, body, conn} = read_body(conn, opts)
-    opts[:index_agent] |> SearchIndexAgent.insert(id, body)
+    {:ok, parsed_body} = Jason.decode(body)
+    opts[:index_agent] |> SearchIndexAgent.insert(id, parsed_body)
     send_resp(conn, 201, "")
   end
 
