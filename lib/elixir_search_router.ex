@@ -24,9 +24,9 @@ defmodule ElixirSearchRouter do
 
   get "/documents/:id" do
     opts[:index_agent]
-      |> SearchIndexAgent.get()
-      |> SearchIndex.get(id)
-      |> doc_get_response(conn)
+    |> SearchIndexAgent.get()
+    |> SearchIndex.get(id)
+    |> doc_get_response(conn)
   end
 
   match _ do
